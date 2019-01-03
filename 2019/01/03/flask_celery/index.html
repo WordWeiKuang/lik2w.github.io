@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Flask celery | kw26 | 这个人很懒</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="Celery 是一个开源的分布任务队列， 执行某些耗时较长的工作时，可以使用Celery在后台执行，而接口只需返回202即可。 安装celery使用redis作为celery的储存后端1$ sudo apt-get install redis-server 启动redis1redis-server 安装celery12pip install celerypip install redis 编写一个">
+<meta name="keywords" content="python js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flask celery">
+<meta property="og:url" content="kw26.github.io/2019/01/03/flask_celery/index.html">
+<meta property="og:site_name" content="kw26">
+<meta property="og:description" content="Celery 是一个开源的分布任务队列， 执行某些耗时较长的工作时，可以使用Celery在后台执行，而接口只需返回202即可。 安装celery使用redis作为celery的储存后端1$ sudo apt-get install redis-server 启动redis1redis-server 安装celery12pip install celerypip install redis 编写一个">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-01-03T03:05:48.285Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Flask celery">
+<meta name="twitter:description" content="Celery 是一个开源的分布任务队列， 执行某些耗时较长的工作时，可以使用Celery在后台执行，而接口只需返回202即可。 安装celery使用redis作为celery的储存后端1$ sudo apt-get install redis-server 启动redis1redis-server 安装celery12pip install celerypip install redis 编写一个">
+    
+        <link rel="alternate" type="application/atom+xml" title="kw26" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">kw26</h5>
+          <a href="mailto:kuangwei@kw26.org" title="kuangwei@kw26.org" class="mail">kuangwei@kw26.org</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/kw26" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Flask celery</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Flask celery</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-01-03T01:20:11.803Z" itemprop="datePublished" class="page-time">
+  2019-01-03
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装celery"><span class="post-toc-number">1.</span> <span class="post-toc-text">安装celery</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#编写一个task"><span class="post-toc-number">2.</span> <span class="post-toc-text">编写一个task</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#启动celery"><span class="post-toc-number">3.</span> <span class="post-toc-text">启动celery</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#测试"><span class="post-toc-number">4.</span> <span class="post-toc-text">测试</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-flask_celery"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Flask celery</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-01-03 09:20:11" datetime="2019-01-03T01:20:11.803Z"  itemprop="datePublished">2019-01-03</time>
+
+            
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p><a href="http://celeryproject.org" target="_blank" rel="noopener">Celery</a> 是一个开源的分布任务队列， 执行某些耗时较长的工作时，可以使用Celery在后台执行，而接口只需返回202即可。</p>
+<h2 id="安装celery"><a href="#安装celery" class="headerlink" title="安装celery"></a>安装celery</h2><p>使用redis作为celery的储存后端<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install redis-server</span><br></pre></td></tr></table></figure></p>
+<p>启动redis<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-server</span><br></pre></td></tr></table></figure></p>
+<p>安装celery<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip install celery</span><br><span class="line">pip install redis</span><br></pre></td></tr></table></figure></p>
+<h2 id="编写一个task"><a href="#编写一个task" class="headerlink" title="编写一个task"></a>编写一个task</h2><p>app.py<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line"><span class="keyword">from</span> celery <span class="keyword">import</span> Celery</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">make_celery</span><span class="params">(app)</span>:</span></span><br><span class="line">    celery = Celery(</span><br><span class="line">        app.import_name,</span><br><span class="line">        backend = app.config[<span class="string">'CELERY_RESULT_BACKEND'</span>],</span><br><span class="line">        broker = app.config[<span class="string">'CELERY_BROKER_URL'</span>]</span><br><span class="line">    )</span><br><span class="line">    celery.conf.update(app.config)</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">ContextTask</span><span class="params">(celery.Task)</span>:</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">call</span><span class="params">(self, *args, **kwargs)</span>:</span></span><br><span class="line">            <span class="keyword">with</span> app.app_context():</span><br><span class="line">                <span class="keyword">return</span> self.run(*args, **kwargs)</span><br><span class="line"></span><br><span class="line">    celery.Task = ContextTask</span><br><span class="line">    <span class="keyword">return</span> celery</span><br><span class="line">    </span><br><span class="line">flask_app = Flask(__name__)</span><br><span class="line">flask_app.config.update(</span><br><span class="line">    CELERY_BROKER_URL = <span class="string">'redis://localhost:6379'</span>,</span><br><span class="line">    CELERY_RESULT_BACKEND = <span class="string">'redis://localhost:6379'</span></span><br><span class="line">)</span><br><span class="line">celery = make_celery(flask_app)</span><br><span class="line"></span><br><span class="line"><span class="meta">@celery.task()</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(a, b)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> a + b</span><br></pre></td></tr></table></figure></p>
+<h2 id="启动celery"><a href="#启动celery" class="headerlink" title="启动celery"></a>启动celery</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ celery -A app worker --loglevel=info</span><br></pre></td></tr></table></figure>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ python3</span><br><span class="line">&gt;&gt;&gt;from app import add</span><br><span class="line">&gt;&gt;&gt;res = add.delay(4, 3)</span><br><span class="line">&gt;&gt;&gt;res.get()</span><br><span class="line">7</span><br></pre></td></tr></table></figure>
+<p>参考：<a href="http://flask.pocoo.org/docs/1.0/patterns/celery/" target="_blank" rel="noopener">http://flask.pocoo.org/docs/1.0/patterns/celery/</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最終更新：<time datetime="2019-01-03T03:05:48.285Z" itemprop="dateUpdated">2019-01-03 11:05:48</time>
+</span><br>
+
+
+        
+        thanks
+        
+    </div>
+    
+    <footer>
+        <a href="kw26.github.io">
+            <img src="/img/avatar.png" alt="kw26">
+            kw26
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=kw26.github.io/2019/01/03/flask_celery/&title=《Flask celery》 — kw26&pic=kw26.github.io/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=kw26.github.io/2019/01/03/flask_celery/&title=《Flask celery》 — kw26&source=web全沾" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=kw26.github.io/2019/01/03/flask_celery/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Flask celery》 — kw26&url=kw26.github.io/2019/01/03/flask_celery/&via=kw26.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=kw26.github.io/2019/01/03/flask_celery/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/09/28/hello-world/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Hello World</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>kw26 &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=kw26.github.io/2019/01/03/flask_celery/&title=《Flask celery》 — kw26&pic=kw26.github.io/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=kw26.github.io/2019/01/03/flask_celery/&title=《Flask celery》 — kw26&source=web全沾" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=kw26.github.io/2019/01/03/flask_celery/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Flask celery》 — kw26&url=kw26.github.io/2019/01/03/flask_celery/&via=kw26.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=kw26.github.io/2019/01/03/flask_celery/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAAByklEQVR42u3aS46DMBAFQO5/aeYAkclrt+1BUXmFUIByFi3357ridQ/W528+r5/fdu1YuLi4be79uHLuM3T0ztyAi4t7nvv84dGrk/CU/x3R5nFxcV/JTQ4xyVO4uLi/xJ1LhJI7uLi4b+PmR5DkEJNAt+dquLi4DW5epdx3vaW+i4uLO8W9i6ufwNyNhYuLe4ZbLXAkScuqRuywCIuLi3uEm4Oq6U21CFIY0cDFxd3GnRuh6AxXJcMZw/CHi4v7T9y5UYlkVCt5qjyShYuLu4FbPdzkH6uGrTxlwsXFPcPtZBYJujqwFY1/4eLibuNWA0q077jMkR9uCp0fXFzcNneukJFso9O47ZRdcHFxV3Hn0pVVLdVkG8OGCi4u7mZuXu5cFaQWDF7g4uIe4SaBKR/OyJ8tD2Hg4uIe4c4NWFTbMNWySyH5wcXF3cZ93kYeqjpVmS+/wcXF3cydK2626q/FIIiLi3ue2391tbmSl1PzwxAuLu4ObrXoWf1MZ+RismCKi4u7iJskP9XAVC2ylAumuLi4r+fOtVvyEImLi/tmbj/JabVjcXFxD3LLo5NxAaWK+/Jn4eLiHuHmSUj1zlwLtp8y4eLiNrh/DS3DQollwi4AAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
