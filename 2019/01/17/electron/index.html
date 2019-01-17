@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Electron 开发总结 | kw26 | 这个人很懒</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="实习的时候在一家小公司做前端开发, 用Electron做软件客户端。在接触到Electron之前，我一直使用PyQt作为软件客户端解决方案, 但是界面开发起非常痛苦。Electron极大的降低了桌面客户端的开发成本。 安装环境1.nodejs v8.*以上版本 http://nodejs.cn/download/ 2.npm 建议使用 cnpm1$ npm install -g cnpm --re">
+<meta name="keywords" content="python js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Electron 开发总结">
+<meta property="og:url" content="kw26.github.io/2019/01/17/electron/index.html">
+<meta property="og:site_name" content="kw26">
+<meta property="og:description" content="实习的时候在一家小公司做前端开发, 用Electron做软件客户端。在接触到Electron之前，我一直使用PyQt作为软件客户端解决方案, 但是界面开发起非常痛苦。Electron极大的降低了桌面客户端的开发成本。 安装环境1.nodejs v8.*以上版本 http://nodejs.cn/download/ 2.npm 建议使用 cnpm1$ npm install -g cnpm --re">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-01-17T09:20:02.402Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Electron 开发总结">
+<meta name="twitter:description" content="实习的时候在一家小公司做前端开发, 用Electron做软件客户端。在接触到Electron之前，我一直使用PyQt作为软件客户端解决方案, 但是界面开发起非常痛苦。Electron极大的降低了桌面客户端的开发成本。 安装环境1.nodejs v8.*以上版本 http://nodejs.cn/download/ 2.npm 建议使用 cnpm1$ npm install -g cnpm --re">
+    
+        <link rel="alternate" type="application/atom+xml" title="kw26" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">kw26</h5>
+          <a href="mailto:kuangwei@kw26.org" title="kuangwei@kw26.org" class="mail">kuangwei@kw26.org</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/kw26" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Electron 开发总结</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Electron 开发总结</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-01-17T09:14:01.242Z" itemprop="datePublished" class="page-time">
+  2019-01-17
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装环境"><span class="post-toc-number">1.</span> <span class="post-toc-text">安装环境</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#开发"><span class="post-toc-number">2.</span> <span class="post-toc-text">开发</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#About-Electron"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">About Electron</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#quick-start-快速入门"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">quick start 快速入门</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#全局使用electron"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">全局使用electron</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Frameless-Window-无边框的窗口"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">Frameless Window 无边框的窗口</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#进程之间通信"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">进程之间通信</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#方案1-ipc通信"><span class="post-toc-number">2.5.1.</span> <span class="post-toc-text">方案1:ipc通信</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#方案2-remote共享对象"><span class="post-toc-number">2.5.2.</span> <span class="post-toc-text">方案2:remote共享对象</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#更新中···"><span class="post-toc-number">2.6.</span> <span class="post-toc-text">更新中···</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-electron"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Electron 开发总结</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-01-17 17:14:01" datetime="2019-01-17T09:14:01.242Z"  itemprop="datePublished">2019-01-17</time>
+
+            
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>实习的时候在一家小公司做前端开发, 用Electron做软件客户端。在接触到Electron之前，我一直使用PyQt作为软件客户端解决方案, 但是界面开发起非常痛苦。Electron极大的降低了桌面客户端的开发成本。</p>
+<h2 id="安装环境"><a href="#安装环境" class="headerlink" title="安装环境"></a>安装环境</h2><p>1.nodejs v8.*以上版本 <a href="http://nodejs.cn/download/" target="_blank" rel="noopener">http://nodejs.cn/download/</a></p>
+<p>2.npm 建议使用 cnpm<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g cnpm --registry=https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure></p>
+<p>3.安装electron<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install electron -g</span><br></pre></td></tr></table></figure></p>
+<p>4.安装app的依赖<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd app/</span><br><span class="line">$ npm install</span><br></pre></td></tr></table></figure></p>
+<h2 id="开发"><a href="#开发" class="headerlink" title="开发"></a>开发</h2><h3 id="About-Electron"><a href="#About-Electron" class="headerlink" title="About Electron"></a>About Electron</h3><p>官方文档 <a href="https://electron.atom.io/docs/" target="_blank" rel="noopener">https://electron.atom.io/docs/</a></p>
+<h3 id="quick-start-快速入门"><a href="#quick-start-快速入门" class="headerlink" title="quick start 快速入门"></a>quick start 快速入门</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># Clone the Quick Start repository</span><br><span class="line">$ git clone https://github.com/electron/electron-quick-start</span><br><span class="line"></span><br><span class="line"># Go into the repository</span><br><span class="line">$ cd electron-quick-start</span><br><span class="line"></span><br><span class="line"># Install the dependencies and run</span><br><span class="line">$ npm install &amp;&amp; npm start</span><br></pre></td></tr></table></figure>
+<h3 id="全局使用electron"><a href="#全局使用electron" class="headerlink" title="全局使用electron"></a>全局使用electron</h3><p>electron 可以在任意地方被调用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ electron [path]</span><br></pre></td></tr></table></figure>
+<p>electron窗口出现后可以将electron工程的文件夹直接拖进窗口以运行</p>
+<h3 id="Frameless-Window-无边框的窗口"><a href="#Frameless-Window-无边框的窗口" class="headerlink" title="Frameless Window 无边框的窗口"></a>Frameless Window 无边框的窗口</h3><p>To create a frameless window, you need to set frame to false in BrowserWindow’s options:</p>
+<p>在新建窗口对象时添加属性 frame : false</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;BrowserWindow&#125; = <span class="built_in">require</span>(<span class="string">'electron'</span>)</span><br><span class="line"><span class="keyword">let</span> win = <span class="keyword">new</span> BrowserWindow(&#123;<span class="attr">width</span>: <span class="number">800</span>, <span class="attr">height</span>: <span class="number">600</span>, <span class="attr">frame</span>: <span class="literal">false</span>&#125;)</span><br><span class="line">win.show()</span><br></pre></td></tr></table></figure>
+<h3 id="进程之间通信"><a href="#进程之间通信" class="headerlink" title="进程之间通信"></a>进程之间通信</h3><h4 id="方案1-ipc通信"><a href="#方案1-ipc通信" class="headerlink" title="方案1:ipc通信"></a>方案1:ipc通信</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 主进程</span></span><br><span class="line"><span class="keyword">const</span> &#123; ipcMain &#125; = <span class="built_in">require</span>(<span class="string">'electron'</span>);</span><br><span class="line"></span><br><span class="line">ipcMain.on(<span class="string">'send-message'</span>,  (e, name) =&gt; &#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// edit your code</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// return message to renderer process</span></span><br><span class="line">  e.sender.send(<span class="string">'res-message'</span>, <span class="string">`hello <span class="subst">$&#123;name&#125;</span>`</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 渲染进程</span></span><br><span class="line"><span class="keyword">const</span> ipcRenderer = <span class="built_in">require</span>(<span class="string">'electron'</span>).ipcRenderer;</span><br><span class="line"></span><br><span class="line">ipcRenderer.send(<span class="string">'send-message'</span>, <span class="string">'Tim'</span>);</span><br><span class="line"></span><br><span class="line">ipcRenderer.on(<span class="string">'res-message'</span>, (res) =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h4 id="方案2-remote共享对象"><a href="#方案2-remote共享对象" class="headerlink" title="方案2:remote共享对象"></a>方案2:remote共享对象</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在主进程中</span></span><br><span class="line">global.sharedObject = &#123;</span><br><span class="line">  someProperty: <span class="string">'default value'</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 在第一个页面中</span></span><br><span class="line"><span class="built_in">require</span>(<span class="string">'remote'</span>).getGlobal(<span class="string">'sharedObject'</span>).someProperty = <span class="string">'new value'</span>;</span><br><span class="line"><span class="comment">// 在第二个页面中</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">require</span>(<span class="string">'remote'</span>).getGlobal(<span class="string">'sharedObject'</span>).someProperty);</span><br></pre></td></tr></table></figure>
+<h3 id="更新中···"><a href="#更新中···" class="headerlink" title="更新中···"></a>更新中···</h3>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-01-17T09:20:02.402Z" itemprop="dateUpdated">2019-01-17 17:20:02</time>
+</span><br>
+
+
+        
+        thanks
+        
+    </div>
+    
+    <footer>
+        <a href="kw26.github.io">
+            <img src="/img/avatar.png" alt="kw26">
+            kw26
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=kw26.github.io/2019/01/17/electron/&title=《Electron 开发总结》 — kw26&pic=kw26.github.io/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=kw26.github.io/2019/01/17/electron/&title=《Electron 开发总结》 — kw26&source=web全沾" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=kw26.github.io/2019/01/17/electron/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Electron 开发总结》 — kw26&url=kw26.github.io/2019/01/17/electron/&via=kw26.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=kw26.github.io/2019/01/17/electron/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/01/11/tomyself/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">20岁生日快乐！</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>kw26 &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=kw26.github.io/2019/01/17/electron/&title=《Electron 开发总结》 — kw26&pic=kw26.github.io/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=kw26.github.io/2019/01/17/electron/&title=《Electron 开发总结》 — kw26&source=web全沾" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=kw26.github.io/2019/01/17/electron/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Electron 开发总结》 — kw26&url=kw26.github.io/2019/01/17/electron/&via=kw26.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=kw26.github.io/2019/01/17/electron/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABy0lEQVR42u3aQY6DMAwF0N7/0p1tpSrwHYPLSC+rqkDyYGEltl+veLw/xuc/37/7T10wcHFx29z34Vgt871Y9anV1ZUBFxd3nruKGKt78iBV/RwnNlxc3Adzj+n5/gQXF/e/c6tHl2McLi7u87nJFuT42JMEwXz+C85quLi4DW6epbzv9y35XVxc3C3uuziqL7C3ynJ1XFzcEW6/lJIfb6rl2OVTuLi449z8uNJpwthLs+Li4s5zywGlWCBJZo7CHy4u7iB3b0OTJDfzT1DO7+Li4t7M7UzdT7AW0qm4uLg3c/NERufokoS2aB5cXNxBbrVw0klttJIvuLi4P+VWkx3VyFN9YVxc3Elu0jCRb4nyq/krLdsvcHFxR7jJrf0Wrs3glddtcHFxL+LmN5UTGVslk6Q8g4uLeze3Wt6opjPycmwh7uLi4o5wO6y87NqC4uLijnD3mq6Sq3vp1JP5cXFxR7h7DRPV9qw8/Zo/i4uLezd3L3jlydBWy8VeexYuLu5F3DzFuVeIzWPnyf24uLiP5FYTH52D00kpBRcX98HcawsqJxspXFzcQW5++KmmNfPZov0MLi7uCLfaVtVv3chDYSu/i4uLu8P9A5dh2FcimD9yAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
